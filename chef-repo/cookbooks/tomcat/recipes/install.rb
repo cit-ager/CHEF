@@ -26,12 +26,28 @@ Dir["#{node['tomcat']['LOC']}/webapps/*"].each do |loc|
 end 
 
 remote_file 'Downloading Student War file' do 
-    path "/opt/#{node['tomcat']['TAR_FILE']}/webapps/student.war"
+    path "#{node['tomcat']['LOC']}/webapps/student.war"
     source "#{node['tomcat']['WAR']}"
 end
 
 remote_file 'Downloading JDBC jar file' do 
-    path "/opt/#{node['tomcat']['TAR_FILE']}/lib/mysql-connector-java-5.1.40.jar"
-    source "#{node['tomcat']['WAR']}"
-    not_if "ls -l /opt/#{node['tomcat']['TAR_FILE']}/lib/mysql-connector-java-5.1.40.jar"
+    path "#{node['tomcat']['LOC']}/lib/mysql-connector-java-5.1.40.jar"
+    source "#{node['tomcat']['JDBC_JAR']}"
+    not_if "ls -l #{node['tomcat']['LOC']}/lib/mysql-connector-java-5.1.40.jar"
+end
+
+template 'Updating DB Connectors' do
+    path "#{node['tomcat']['LOC']}/conf/context.xml"
+    source 'context.xml.erb'
+    variables(:IPADDRESS => node['ipaddress'])
+end
+
+if `ps -ef | grep java | grep -v grep` != ""
+    execute 'Shutdown Tomcat' do
+        command "#{node['tomcat']['LOC']}/bin/shutdown.sh"
+    end
+end 
+
+execute 'Start Tomcat' do
+    command "#{node['tomcat']['LOC']}/bin/startup.sh"
 end
