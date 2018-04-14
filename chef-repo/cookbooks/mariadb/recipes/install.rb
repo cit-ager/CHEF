@@ -5,5 +5,5 @@ end
 
 service 'Start MariaDB Service' do
     service_name 'mariadb'
-    action :start
+    action [ :start, :enable ]
 end

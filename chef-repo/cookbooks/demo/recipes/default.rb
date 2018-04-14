@@ -11,3 +11,5 @@ puts 'Hello World'
 
 #puts "#{node['network']['interfaces']['eth0']}"
 puts node['ipaddress']
+
+puts node['demo']['URL']
