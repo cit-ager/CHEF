@@ -13,3 +13,6 @@ puts 'Hello World'
 puts node['ipaddress']
 
 puts node['demo']['URL']
+puts 'Welcome to versioning'
+
+package 'httpd'

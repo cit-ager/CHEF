@@ -30,7 +30,7 @@
     -->
 <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
     maxActive="50" maxIdle="30" maxWait="10000"
-    username="student" password="student@1"
+    username="<%= node['tomcat']['DBUSER']%>" password="<%= node['tomcat']['DBPASS']%>"
     driverClassName="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://<%= node['ipaddress'] %>:3306/studentapp"/>
+    url="jdbc:mysql://<%=node['tomcat']['DBIP'] %>:3306/<%= node['tomcat']['DBNAME'] %>"/>
 </Context>
