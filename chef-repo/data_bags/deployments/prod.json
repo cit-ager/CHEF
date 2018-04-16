@@ -1,0 +1,6 @@
+{
+"id": "prod",
+"url": "https://github.com/cit-ager/APP-STACK/raw/master/student.war",
+"env" : "PROD",
+"project" : "student"
+}
