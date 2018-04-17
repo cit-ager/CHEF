@@ -24,7 +24,7 @@ default['push_jobs']['package_version']             = nil
 default['push_jobs']['local_package_path']          = nil
 
 default['push_jobs']['config']['template_cookbook'] = nil
-default['push_jobs']['whitelist']                   = { 'chef-client' => 'chef-client', 'update-push' => 'chef-client -o recipe[push-jobs]' }
+default['push_jobs']['whitelist']                   = { 'chef-client' => 'chef-client', 'update-push' => 'chef-client -o recipe[push-jobs]', 'deploy' => 'chef-client -o recipe[tomcat::deploy]' }
 default['push_jobs']['environment_variables']       = { 'LC_ALL' => 'en_US.UTF-8' }
 
 # must be set to true in order to communicate with Push Jobs 1.X server
